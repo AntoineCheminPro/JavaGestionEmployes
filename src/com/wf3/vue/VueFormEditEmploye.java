@@ -243,6 +243,8 @@ public class VueFormEditEmploye extends JPanel {
 				EmployeModel model = new EmployeModel();
 				model.editEmploye(employe);
 				JOptionPane.showMessageDialog(panel_1, "Employé mis à jour");
+				
+				
 				vueAllEmployes = new VueAllEmployes(layeredPane);
 				switchScreen(vueAllEmployes);
 			}

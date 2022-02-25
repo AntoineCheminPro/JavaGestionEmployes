@@ -3,7 +3,9 @@ package com.wf3.vue;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,11 +20,13 @@ import com.wf3.model.Employe;
 import com.wf3.model.EmployeModel;
 
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class VueFormAdresse extends JPanel {
@@ -31,6 +35,8 @@ public class VueFormAdresse extends JPanel {
 	private ControllerAdresse controllerAdresse;
 	private JLayeredPane layeredPane;
 	private Employe employe;
+	private Adresse adresse;
+	private VueAllEmployes vueAllEmployes;
 
 	/**
 	 * @wbp.nonvisual location=100,369
@@ -43,52 +49,63 @@ public class VueFormAdresse extends JPanel {
 		this.layeredPane = layeredPane;
 		
 		this.employe = employe;
+		AdresseModel adresseModel = new AdresseModel();
+		adresse = adresseModel.verifAdresse(employe);
 
 		panel = new JPanel();
 		panel.setBackground(Color.MAGENTA);
-		
-
+	
 		JLabel labelRue = new JLabel("Rue");
-
 		JTextField rue = new JTextField();
 		labelRue.setLabelFor(rue);
 		rue.setColumns(10);
 
 		JLabel labelVille = new JLabel("Ville");
-
 		JTextField ville = new JTextField();
 		labelVille.setLabelFor(ville);
 		ville.setColumns(10);
 
 		JLabel labelPostal = new JLabel("Code postal");
-
 		JTextField postal = new JTextField();
 		labelPostal.setLabelFor(postal);
 		postal.setColumns(10);
-
-		//if(adresse !exist) {
-		JButton btnNewButton = new JButton("Enregistrer");
-		//}
-//		else {
-//		JButton btnNewButton = new JButton("Mettre à jour");
-//		}
+	
+		AdresseModel model = new AdresseModel();
+		
+		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JButton btnNewButton;
+		if(adresse == null)
+		{
+		btnNewButton = new JButton("Enregistrer");
+		}
+		else {
+		rue.setText(adresse.getRue());
+		ville.setText(adresse.getVille());
+		postal.setText(adresse.getPostal());
+		btnNewButton = new JButton("Mettre à jour");
+		}
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				String rueE = rue.getText();
 				String postalE = postal.getText();
 				String villeE = ville.getText();
-				Adresse adresse = new Adresse(rueE, postalE, villeE);
-				AdresseModel model = new AdresseModel();
-				//if(adresse !exist) {
-				model.addAdresse(adresse, employe);
-				//}
-//				else {
-				//***renseigner les données
-//				model.editAdresse(adresse, employe);
-//				}
-//				switchToEditAdressScreen(employe, layeredPane);
-//				
+				adresse = new Adresse(rueE, postalE, villeE);
+				adresse.setId_employe(employe.getId());
+			
+				if(adresse == null ) {
+					JOptionPane.showMessageDialog(panel, "Adresse enregistrée");
+					model.addAdresse(adresse, employe);
+				}
+				else {
+					JOptionPane.showMessageDialog(panel, "Adresse mise à jour");
+					model.editAdresse(adresse);
+				}
+				
+				vueAllEmployes = new VueAllEmployes(layeredPane);
+				switchScreen(vueAllEmployes);
+			
 			}
 		});
 
@@ -136,7 +153,7 @@ public class VueFormAdresse extends JPanel {
 					.addGap(5)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
 		);
-		
+			
 		
 		setLayout(groupLayout);
 		
@@ -148,9 +165,11 @@ public class VueFormAdresse extends JPanel {
 		return Integer.parseInt(id);
 	}
 
-	public void editAdresse(Employe employe) {
-
-		employe = this.employe;
-		// switchToEditAdressScreen(employe);
+	
+	public void switchScreen(JPanel panelToUpload) {
+		this.removeAll();
+		this.add(panelToUpload);
+		this.repaint();
+		this.revalidate();
 	}
 }

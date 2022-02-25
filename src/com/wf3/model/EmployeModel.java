@@ -37,9 +37,7 @@ public int addEmploye(Employe employe) {
 		    connexion.close();
 		    
 		    return 1;
-
-
-        }
+       }
 
     } catch (SQLException e1) {
         System.out.println("JDBC probleme" + e1);
@@ -61,7 +59,7 @@ public int editEmploye(Employe employe) {
 				 			+ "WHERE id="+employe.getId());
 			statement.setString(1, employe.getNom()); 
 	    	statement.setString(2, employe.getPrenom()); 
-	    	statement.setInt(3, employe.getSexe()); 
+	    statement.setInt(3, employe.getSexe()); 
 	    	statement.setDate(4, new java.sql.Date(employe.getDateDeNaissance().getTime()));
 	    	statement.setDate(5, new java.sql.Date(employe.getDateEmbauche().getTime()));
 	    	statement.setString(6, employe.getCode()); 
@@ -70,7 +68,7 @@ public int editEmploye(Employe employe) {
 	  
 	    	statement.close();
 		    connexion.close();
-		    System.out.println(employe.getId());
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

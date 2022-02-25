@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import com.wf3.controller.ControllerEmploye;
+import com.wf3.model.Adresse;
 import com.wf3.model.AdresseModel;
 import com.wf3.model.Employe;
 import com.wf3.model.EmployeModel;
@@ -35,6 +36,7 @@ public class VueAllEmployes extends JPanel {
 	private VueFormEmploye vueFormEmploye;
 	private JTable table;
 	private JLayeredPane layeredPane;
+	private Adresse adresse;
 
 	/**
 	 * Create the frame.
@@ -99,7 +101,8 @@ public class VueAllEmployes extends JPanel {
 					try {
 						employe = employeMod.OneEmployeById(getEmployeIdFromRow());
 						AdresseModel adresseModel = new AdresseModel();
-						adresseModel.verifAdresse(employe);
+						adresse = adresseModel.verifAdresse(employe);
+					
 						switchToEditAdressScreen(employe, layeredPane);
 					} catch (ParseException e1) {
 						JOptionPane.showMessageDialog(layeredPane, "Aucun employé selectionné", "Error", JOptionPane.ERROR_MESSAGE);

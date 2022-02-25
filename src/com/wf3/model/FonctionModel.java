@@ -1,22 +1,18 @@
 package com.wf3.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 
-import javax.swing.JTable;
-
-public class AdresseModel extends Model {
+public class FonctionModel extends Model {
 
 	private Employe employe;
 	private int id;
-	private Adresse adresse;
+	private Fonction fonction;
 
-	public void addAdresse(Adresse adresse, Employe employe) {
+	public void addFonction(Fonction fonction, Employe employe) {
 
 		Connection connexion = dbConnect();
 		PreparedStatement statement;
@@ -41,7 +37,7 @@ public class AdresseModel extends Model {
 
 	}
 
-	public Adresse verifAdresse(Employe employe) {
+	public Adresse verifFonction(Employe employe) {
 
 		Connection connexion = dbConnect();
 
@@ -54,10 +50,10 @@ public class AdresseModel extends Model {
 			ResultSet resultat = statement1.executeQuery(query);
 
 			if (resultat.next()) {
-				adresse = new Adresse(resultat.getString("rue"), resultat.getString("postal"),
+				fonction = new Fonction(resultat.getString("rue"), resultat.getString("postal"),
 						resultat.getString("ville"));
 
-				return adresse;
+				return fonction;
 
 			}
 
@@ -99,4 +95,5 @@ public class AdresseModel extends Model {
 		}
 
 	}
+
 }

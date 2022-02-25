@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.wf3.controller.Controller;
 import com.wf3.controller.ControllerAdresse;
 
 import com.wf3.model.Adresse;
@@ -38,16 +39,10 @@ public class VueFormAdresse extends JPanel {
 	private Adresse adresse;
 	private VueAllEmployes vueAllEmployes;
 
-	/**
-	 * @wbp.nonvisual location=100,369
-	 */
-
-	/**
-	 * Create the panel.
-	 */
+	
 	public VueFormAdresse(Employe employe, JLayeredPane layeredPane) {
 		this.layeredPane = layeredPane;
-		
+				
 		this.employe = employe;
 		AdresseModel adresseModel = new AdresseModel();
 		adresse = adresseModel.verifAdresse(employe);
@@ -103,8 +98,9 @@ public class VueFormAdresse extends JPanel {
 					model.editAdresse(adresse);
 				}
 				
-				vueAllEmployes = new VueAllEmployes(layeredPane);
-				switchScreen(vueAllEmployes);
+//				vueAllEmployes = new VueAllEmployes(layeredPane);
+				Controller.reload();
+				
 			
 			}
 		});

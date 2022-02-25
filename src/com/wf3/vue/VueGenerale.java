@@ -86,7 +86,7 @@ public class VueGenerale extends JFrame {
 	public void defaultPanel() {
 		layeredPane.removeAll();
 	    layeredPane.setLayout(new BorderLayout(0, 0));
-	    layeredPane.add(vueFormEmploye);
+	    layeredPane.add(vueAllEmployes);
 	    layeredPane.repaint();
 	    layeredPane.revalidate();
 	}

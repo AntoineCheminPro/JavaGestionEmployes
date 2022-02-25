@@ -38,10 +38,7 @@ public class VueAllEmployes extends JPanel {
 	private JLayeredPane layeredPane;
 	private Adresse adresse;
 
-	/**
-	 * Create the frame.
-	 * @throws ParseException 
-	 */
+	
 	public VueAllEmployes(JLayeredPane layeredPane) {
 		this.layeredPane = layeredPane;
 		modelDynEmploye = new ModelDynamiqueEmploye(getAllEmployes());
@@ -112,8 +109,7 @@ public class VueAllEmployes extends JPanel {
 					}
 			}
 		});
-		btnNewButton_2.setBackground(Color.GREEN);
-		
+		btnNewButton_2.setBackground(Color.GREEN);	
 		
 		JButton btnNewButton_3 = new JButton("fonction");
 		btnNewButton_3.setBackground(Color.GREEN);

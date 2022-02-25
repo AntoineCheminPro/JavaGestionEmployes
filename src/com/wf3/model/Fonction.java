@@ -9,12 +9,12 @@ public class Fonction {
 	private int niveau;
 	private String departement;
 
-	public Fonction(String titre, int rtt, Date date, int niveau, String departement) {
-		this.titre = titre;
-		this.rtt = rtt;
-		this.date = date;
+	public Fonction(Date dateF, String titreF, String departementF, int niveau, int rttF) {
+		this.date = dateF;
+		this.titre = titreF;
+		this.departement = departementF;
 		this.niveau = niveau;
-		this.departement = departement;
+		this.rtt = rttF;
 	}
 
 	public float salaireCharge() {

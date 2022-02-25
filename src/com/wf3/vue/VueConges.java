@@ -20,6 +20,7 @@ import com.wf3.model.Employe;
 import com.wf3.model.Fonction;
 import com.wf3.model.GestionDate;
 import com.wf3.model.Salaire;
+import java.awt.Color;
 
 public class VueConges extends JFrame {
 
@@ -47,31 +48,32 @@ public class VueConges extends JFrame {
 	 */
 	public VueConges() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 453, 725);
+		frame.getContentPane().setBackground(Color.GREEN);
+		frame.setBounds(100, 100, 453, 215);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel labelConges = new JLabel("Conges");
-		labelConges.setBounds(10, 567, 46, 14);
+		labelConges.setBounds(195, 11, 46, 14);
 		frame.getContentPane().add(labelConges);
 		
 		JLabel labelDebutConges = new JLabel("Debut");
-		labelDebutConges.setBounds(83, 567, 46, 14);
+		labelDebutConges.setBounds(83, 44, 46, 14);
 		frame.getContentPane().add(labelDebutConges);
 		
 		JTextField debutConges = new JTextField();
 		labelDebutConges.setLabelFor(debutConges);
-		debutConges.setBounds(195, 564, 86, 20);
+		debutConges.setBounds(185, 41, 86, 20);
 		frame.getContentPane().add(debutConges);
 		debutConges.setColumns(10);
 		
 		JLabel labelFinConges = new JLabel("Fin");
-		labelFinConges.setBounds(83, 594, 46, 14);
+		labelFinConges.setBounds(83, 69, 46, 14);
 		frame.getContentPane().add(labelFinConges);
 		
 		JTextField finConges = new JTextField();
 		labelFinConges.setLabelFor(finConges);
-		finConges.setBounds(195, 591, 86, 20);
+		finConges.setBounds(185, 72, 86, 20);
 		frame.getContentPane().add(finConges);
 		finConges.setColumns(10);
 		
@@ -116,7 +118,7 @@ public class VueConges extends JFrame {
 			    }
 			}
 		});
-		btnNewButton.setBounds(169, 652, 102, 23);
+		btnNewButton.setBounds(139, 117, 102, 23);
 		frame.getContentPane().add(btnNewButton);
 	}
 

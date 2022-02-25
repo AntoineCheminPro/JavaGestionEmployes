@@ -33,5 +33,4 @@ public class ControllerEmploye extends Controller{
 		}
 		return null;
 	}
-	
 }

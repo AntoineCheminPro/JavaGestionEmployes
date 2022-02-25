@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import com.wf3.controller.ControllerEmploye;
+import com.wf3.model.AdresseModel;
 import com.wf3.model.Employe;
 import com.wf3.model.EmployeModel;
 import com.wf3.model.ModelDynamiqueEmploye;
@@ -91,11 +92,20 @@ public class VueAllEmployes extends JPanel {
 					JOptionPane.showMessageDialog(layeredPane, "Selectionnez une ligne svp", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-//					AdresseModel adresseModel = new AdresseModel();
-//					EmployeModel employeMod = new EmployeModel();
-//					Employe employe;
-//					employe = employeMod.OneEmployeById(getEmployeIdFromRow());
-//					adresseModel.editAdresse(employe, table);
+					
+					EmployeModel employeMod = new EmployeModel();
+					Employe employe;
+										
+					try {
+						employe = employeMod.OneEmployeById(getEmployeIdFromRow());
+						AdresseModel adresseModel = new AdresseModel();
+						adresseModel.verifAdresse(employe);
+						switchToEditAdressScreen(employe, layeredPane);
+					} catch (ParseException e1) {
+						JOptionPane.showMessageDialog(layeredPane, "Aucun employé selectionné", "Error", JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					}
+					
 					}
 			}
 		});
@@ -187,6 +197,15 @@ public class VueAllEmployes extends JPanel {
 		VueFormEditEmploye vueFormEditEmploye = new VueFormEditEmploye(employe, layeredPane);
 	    layeredPane.removeAll();
 	    layeredPane.add(vueFormEditEmploye);
+	    layeredPane.repaint();
+	    layeredPane.revalidate();
+	}
+	
+	public void switchToEditAdressScreen(Employe employe, JLayeredPane layeredPane) {
+		
+		VueFormAdresse vueFormAdresse = new VueFormAdresse(employe, layeredPane);
+	    layeredPane.removeAll();
+	    layeredPane.add(vueFormAdresse);
 	    layeredPane.repaint();
 	    layeredPane.revalidate();
 	}

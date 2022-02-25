@@ -51,35 +51,35 @@ public int addEmploye(Employe employe) {
 
 public int editEmploye(Employe employe) {
 	
-	try {
-        Connection connexion = DriverManager.getConnection(url, user, password);
-
-        if ( connexion != null) {
+	Connection connexion = dbConnect();
         	
-    	PreparedStatement statement = connexion.prepareStatement (
-    			"UPDATE employes SET "
-    			+ "nom=?, prenom=?, sexe=?, date_naissance=?, date_embauche=?, code=?, quotite=? "
-    		 			+ "WHERE id="+employe.getId());
-    	statement.setString(1, employe.getNom()); 
-    	statement.setString(2, employe.getPrenom()); 
-    	statement.setInt(3, employe.getSexe()); 
-    	statement.setDate(4, new java.sql.Date(employe.getDateDeNaissance().getTime()));
-    	statement.setDate(5, new java.sql.Date(employe.getDateEmbauche().getTime()));
-    	statement.setString(6, employe.getCode()); 
-    	statement.setInt(7, employe.getQuotite()); 
-    	statement.executeUpdate();
-  
-    	statement.close();
-	    connexion.close();
-	    System.out.println(employe.getId());
+    	PreparedStatement statement;
+		try {
+			statement = connexion.prepareStatement (
+					"UPDATE employes SET "
+					+ "nom=?, prenom=?, sexe=?, date_naissance=?, date_embauche=?, code=?, quotite=? "
+				 			+ "WHERE id="+employe.getId());
+			statement.setString(1, employe.getNom()); 
+	    	statement.setString(2, employe.getPrenom()); 
+	    	statement.setInt(3, employe.getSexe()); 
+	    	statement.setDate(4, new java.sql.Date(employe.getDateDeNaissance().getTime()));
+	    	statement.setDate(5, new java.sql.Date(employe.getDateEmbauche().getTime()));
+	    	statement.setString(6, employe.getCode()); 
+	    	statement.setInt(7, employe.getQuotite()); 
+	    	statement.executeUpdate();
+	  
+	    	statement.close();
+		    connexion.close();
+		    System.out.println(employe.getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
 	    return 1;
-    }
+    
 
-} catch (SQLException e1) {
-    System.out.println("JDBC probleme" + e1);
-    }
 
-	return 0;
 }
 
 public int deleteEmploye(int id) throws ParseException {
@@ -165,12 +165,12 @@ try {
 	
 	if ( con != null) {
 		// create JDBC statement object
-		Statement st = con.createStatement();
+		Statement statement = con.createStatement();
  
 		// prepare SQL query
 		String query = "SELECT id, nom, prenom, sexe, date_naissance, date_embauche, quotite, code  FROM employes WHERE id="+choosen_id;
   
-		ResultSet resultat = st.executeQuery(query);
+		ResultSet resultat = statement.executeQuery(query);
   
 		      
 		if (resultat.next()) {
@@ -184,7 +184,7 @@ try {
 	      }
 	      
 	      resultat.close();
-	      st.close();
+	      statement.close();
 	      con.close();
  
 	}

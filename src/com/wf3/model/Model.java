@@ -10,14 +10,16 @@ public abstract class Model {
     final String user = "root";
     final String password = "";
     
+    
     public Connection dbConnect () {
     
     try {
     	 
         Connection conn = DriverManager.getConnection(url, user, password);
-     
+        
         if (conn != null) {
             System.out.println("Connected");
+            return conn;
           
         }
     } catch (SQLException ex) {

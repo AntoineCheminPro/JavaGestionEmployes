@@ -1,5 +1,6 @@
 package com.wf3.vue;
 
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -17,104 +18,139 @@ import com.wf3.model.Employe;
 import com.wf3.model.EmployeModel;
 
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
-public class VueFormAdresse extends JFrame {
+public class VueFormAdresse extends JPanel {
 
-	public JFrame frame;
+	public JPanel panel;
 	private ControllerAdresse controllerAdresse;
-	private JLayeredPane layeredPane ;
-	
+	private JLayeredPane layeredPane;
+	private Employe employe;
+
 	/**
-	 * Create the frame.
-	 * @param controllerAdresse 
+	 * @wbp.nonvisual location=100,369
 	 */
-		public VueFormAdresse(ControllerAdresse controllerAdresse, Employe employe, JLayeredPane layeredPane) {
-			this.layeredPane = layeredPane;
-			this.controllerAdresse = controllerAdresse;
-			initializeAdresse(employe.getId());
-		}
-	
-		public void initializeAdresse(int employe_id) {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 318, 227);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+
+	/**
+	 * Create the panel.
+	 */
+	public VueFormAdresse(Employe employe, JLayeredPane layeredPane) {
+		this.layeredPane = layeredPane;
 		
+		this.employe = employe;
+
+		panel = new JPanel();
+		panel.setBackground(Color.MAGENTA);
 		
+
 		JLabel labelRue = new JLabel("Rue");
-		labelRue.setBounds(83, 50, 46, 14);
-		frame.getContentPane().add(labelRue);
-		
+
 		JTextField rue = new JTextField();
 		labelRue.setLabelFor(rue);
-		rue.setBounds(195, 50, 86, 20);
-		frame.getContentPane().add(rue);
 		rue.setColumns(10);
-		
+
 		JLabel labelVille = new JLabel("Ville");
-		labelVille.setBounds(83, 75, 28, 14);
-		frame.getContentPane().add(labelVille);
-		
+
 		JTextField ville = new JTextField();
 		labelVille.setLabelFor(ville);
-		ville.setBounds(195, 75, 86, 20);
-		frame.getContentPane().add(ville);
 		ville.setColumns(10);
-		
+
 		JLabel labelPostal = new JLabel("Code postal");
-		labelPostal.setBounds(83, 100, 102, 14);
-		frame.getContentPane().add(labelPostal);
-		
+
 		JTextField postal = new JTextField();
 		labelPostal.setLabelFor(postal);
-		postal.setBounds(195, 100, 86, 20);
-		frame.getContentPane().add(postal);
 		postal.setColumns(10);
-	
 
-	
-	JButton btnNewButton = new JButton("Enregistrer");
-	btnNewButton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			
-			String rueE = rue.getText();
-			String postalE = postal.getText();
-			String villeE = ville.getText();
-			Adresse adresse = new Adresse(rueE, postalE, villeE);
-			AdresseModel model = new AdresseModel();
-			
-			
-			
-			
-			
-			switchToEditScreen(employe);
-			
-			
-			model.addAdresse(adresse, employe);  
-	}});
-	btnNewButton.setBounds(100, 150, 102, 23);
-	frame.getContentPane().add(btnNewButton);
-	
-	JLabel lblNewLabel = new JLabel("Adresse");
-	lblNewLabel.setBounds(146, 11, 46, 14);
-	frame.getContentPane().add(lblNewLabel);
-}
-		public int getEmployeIdFromRow(JTable table) {
-			 int row = table.getSelectedRow();
-			 String id = table.getModel().getValueAt(row, 0).toString();
-			 return Integer.parseInt(id);
-		}
-		public void switchToEditAdressScreen(Employe employe) {
-			
-			VueFormEditEmploye vueFormEditEmploye = new VueFormEditEmploye(employe, layeredPane);
-		    layeredPane.removeAll();
-		    layeredPane.add(vueFormEditEmploye);
-		    layeredPane.repaint();
-		    layeredPane.revalidate();
-		}
+		//if(adresse !exist) {
+		JButton btnNewButton = new JButton("Enregistrer");
+		//}
+//		else {
+//		JButton btnNewButton = new JButton("Mettre à jour");
+//		}
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String rueE = rue.getText();
+				String postalE = postal.getText();
+				String villeE = ville.getText();
+				Adresse adresse = new Adresse(rueE, postalE, villeE);
+				AdresseModel model = new AdresseModel();
+				//if(adresse !exist) {
+				model.addAdresse(adresse, employe);
+				//}
+//				else {
+				//***renseigner les données
+//				model.editAdresse(adresse, employe);
+//				}
+//				switchToEditAdressScreen(employe, layeredPane);
+//				
+			}
+		});
+
+		JLabel lblNewLabel = new JLabel("Adresse");
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup().addGap(146).addComponent(lblNewLabel,
+						GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup().addGap(83)
+						.addComponent(labelRue, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE).addGap(66)
+						.addComponent(rue, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup().addGap(83)
+						.addComponent(labelVille, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE).addGap(84)
+						.addComponent(ville, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup().addGap(83)
+						.addComponent(labelPostal, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
+						.addGap(10).addComponent(postal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup().addGap(100).addComponent(btnNewButton,
+						GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
+				.createSequentialGroup().addGap(11).addComponent(lblNewLabel).addGap(25)
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(labelRue).addComponent(rue,
+						GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGap(5)
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(labelVille).addComponent(ville,
+						GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGap(5)
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(labelPostal).addComponent(postal,
+						GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGap(30).addComponent(btnNewButton)));
+		panel.setLayout(gl_panel);
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(82)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(5)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
+		);
 		
 		
+		setLayout(groupLayout);
 		
+	}
+
+	public int getEmployeIdFromRow(JTable table) {
+		int row = table.getSelectedRow();
+		String id = table.getModel().getValueAt(row, 0).toString();
+		return Integer.parseInt(id);
+	}
+
+	public void editAdresse(Employe employe) {
+
+		employe = this.employe;
+		// switchToEditAdressScreen(employe);
+	}
 }

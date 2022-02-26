@@ -47,19 +47,24 @@ public class VueFormAdresse extends JPanel {
 		AdresseModel adresseModel = new AdresseModel();
 		adresse = adresseModel.verifAdresse(employe);
 
+		
 		panel = new JPanel();
 		panel.setBackground(Color.MAGENTA);
 	
+		
+		//rue
 		JLabel labelRue = new JLabel("Rue");
 		JTextField rue = new JTextField();
 		labelRue.setLabelFor(rue);
 		rue.setColumns(10);
 
+		//ville
 		JLabel labelVille = new JLabel("Ville");
 		JTextField ville = new JTextField();
 		labelVille.setLabelFor(ville);
 		ville.setColumns(10);
 
+		//code postal
 		JLabel labelPostal = new JLabel("Code postal");
 		JTextField postal = new JTextField();
 		labelPostal.setLabelFor(postal);
@@ -69,6 +74,7 @@ public class VueFormAdresse extends JPanel {
 		
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
+		//bouton
 		JButton btnNewButton;
 		if(adresse == null)
 		{
@@ -107,6 +113,7 @@ public class VueFormAdresse extends JPanel {
 
 		JLabel lblNewLabel = new JLabel("Adresse");
 		GroupLayout gl_panel = new GroupLayout(panel);
+		
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup().addGap(146).addComponent(lblNewLabel,
 						GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
@@ -136,6 +143,8 @@ public class VueFormAdresse extends JPanel {
 						GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				.addGap(30).addComponent(btnNewButton)));
 		panel.setLayout(gl_panel);
+		
+		//groupLayout
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

@@ -5,16 +5,17 @@ import com.wf3.vue.VueFormAdresse;
 
 
 public class ControllerAdresse  extends Controller {
+	
 	private VueFormAdresse vueAdresse ;
-	protected AdresseModel db;
+	protected AdresseModel adresseModel;
+	
 	public void createAdresse(Adresse adresse, int employe_id){
-		db.addAdresse(adresse, employe_id);
+		adresseModel.addAdresse(adresse, employe_id);
 	}
+	
 	public ControllerAdresse() {
 		super();
-		db = new AdresseModel();
-//		vueAdresse = new VueFormAdresse(this);
-//		vueAdresse.frame.setVisible(true);
+		adresseModel = new AdresseModel();
 	}
 
 }

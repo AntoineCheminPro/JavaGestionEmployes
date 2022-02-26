@@ -8,6 +8,7 @@ public class Fonction {
 	private Date date;
 	private int niveau;
 	private String departement;
+	private int id_employe;
 
 	public Fonction(Date dateF, String titreF, String departementF, int niveau, int rttF) {
 		this.date = dateF;
@@ -15,21 +16,6 @@ public class Fonction {
 		this.departement = departementF;
 		this.niveau = niveau;
 		this.rtt = rttF;
-	}
-
-	public float salaireCharge() {
-		return 0;
-
-	}
-
-	public float salaireNet() {
-		return 0;
-
-	}
-
-	public boolean salaireEnCours() {
-		return false;
-
 	}
 
 	public String getTitre() {
@@ -70,6 +56,14 @@ public class Fonction {
 
 	public void setDepartement(String departement) {
 		this.departement = departement;
+	}
+
+	public int getId_employe() {
+		return id_employe;
+	}
+
+	public void setId_employe(int id_employe) {
+		this.id_employe = id_employe;
 	}
 
 }

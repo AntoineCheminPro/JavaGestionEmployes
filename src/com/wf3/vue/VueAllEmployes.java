@@ -16,6 +16,8 @@ import com.wf3.model.Adresse;
 import com.wf3.model.AdresseModel;
 import com.wf3.model.Employe;
 import com.wf3.model.EmployeModel;
+import com.wf3.model.Fonction;
+import com.wf3.model.FonctionModel;
 import com.wf3.model.ModelDynamiqueEmploye;
 
 import java.awt.Color;
@@ -37,11 +39,13 @@ public class VueAllEmployes extends JPanel {
 	private JTable table;
 	private JLayeredPane layeredPane;
 	private Adresse adresse;
+	private Fonction fonction;
 
 	
 	public VueAllEmployes(JLayeredPane layeredPane) {
 		this.layeredPane = layeredPane;
 		modelDynEmploye = new ModelDynamiqueEmploye(getAllEmployes());
+		
 		
 		JPanel panel_1 = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -113,6 +117,33 @@ public class VueAllEmployes extends JPanel {
 		
 		JButton btnNewButton_3 = new JButton("fonction");
 		btnNewButton_3.setBackground(Color.GREEN);
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectionModel().isSelectionEmpty()) {
+					JOptionPane.showMessageDialog(layeredPane, "Selectionnez une ligne svp", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					
+					EmployeModel employeMod = new EmployeModel();
+					Employe employe;
+										
+					try {
+						employe = employeMod.OneEmployeById(getEmployeIdFromRow());
+						FonctionModel fonctionModel = new FonctionModel();
+						fonction = fonctionModel.verifFonction(employe);
+					
+						switchToEditFonctionScreen(employe, layeredPane);
+					} catch (ParseException e1) {
+						JOptionPane.showMessageDialog(layeredPane, "Aucun employé selectionné", "Error", JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					}
+					
+					}
+			}
+		});
+		
+		
+		
 		
 		JButton btnNewButton_4 = new JButton("Cong\u00E9s");
 		btnNewButton_4.setBackground(Color.GREEN);
@@ -205,6 +236,15 @@ public class VueAllEmployes extends JPanel {
 		VueFormAdresse vueFormAdresse = new VueFormAdresse(employe, layeredPane);
 	    layeredPane.removeAll();
 	    layeredPane.add(vueFormAdresse);
+	    layeredPane.repaint();
+	    layeredPane.revalidate();
+	}
+	
+public void switchToEditFonctionScreen(Employe employe, JLayeredPane layeredPane) throws ParseException {
+		
+		VueFormFonction vueFormFonction = new VueFormFonction(employe, layeredPane);
+	    layeredPane.removeAll();
+	    layeredPane.add(vueFormFonction);
 	    layeredPane.repaint();
 	    layeredPane.revalidate();
 	}

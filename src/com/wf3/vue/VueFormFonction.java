@@ -7,54 +7,61 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.wf3.controller.ControllerFonction;
 import com.wf3.model.Adresse;
+import com.wf3.model.AdresseModel;
 import com.wf3.model.Conges;
 import com.wf3.model.Employe;
 import com.wf3.model.Fonction;
+import com.wf3.model.FonctionModel;
 import com.wf3.model.GestionDate;
 import com.wf3.model.Salaire;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class VueFonction extends JPanel {
+public class VueFormFonction extends JPanel {
 
 	private JPanel panel;
 	private Fonction fonction;
-	
-
+	private Employe employe;
+	private ControllerFonction controllerFonction;
+	private VueAllEmployes vueAllEmployes;
+	private JLayeredPane layeredPane;
 	/**
 	 * Create the frame.
+	 * @throws ParseException 
 	 */
-	public VueFonction() {
+	public VueFormFonction(Employe employe, JLayeredPane layeredPane) throws ParseException {
+		this.layeredPane = layeredPane;
+				
+		this.employe = employe;
+		FonctionModel fonctionModel = new FonctionModel();
+		fonction = fonctionModel.verifFonction(employe);
+		
 		panel = new JPanel();
 		panel.setBounds(100, 100, 351, 317);
-		panel.setLayout(null);
 				
 		JPanel panel_6 = new JPanel();
 		panel_6.setBackground(Color.CYAN);
-		panel_6.setBounds(43, 11, 237, 295);
-		panel.add(panel_6);
-				panel_6.setLayout(null);
 		
+				// Fonction
 				JLabel labelFonction = new JLabel("Fonction");
-				labelFonction.setBounds(71, 11, 111, 14);
-				panel_6.add(labelFonction);
-				
 				JPanel panel_1 = new JPanel();
-				panel_1.setBounds(50, 36, 152, 40);
-				panel_6.add(panel_1);
 				
+				//date
 				JLabel labelDateFonction = new JLabel("Date");
-				
 				JTextField dateFonction = new JTextField();
 				dateFonction.setColumns(10);
 				labelDateFonction.setLabelFor(dateFonction);
@@ -78,12 +85,9 @@ public class VueFonction extends JPanel {
 				);
 				panel_1.setLayout(gl_panel_1);
 				
+				//titre
 				JPanel panel_2 = new JPanel();
-				panel_2.setBounds(50, 87, 152, 34);
-				panel_6.add(panel_2);
-				
 				JLabel labelTitreFonction = new JLabel("Titre");
-				
 				JTextField titreFonction = new JTextField();
 				titreFonction.setColumns(10);
 				GroupLayout gl_panel_2 = new GroupLayout(panel_2);
@@ -106,12 +110,9 @@ public class VueFonction extends JPanel {
 				);
 				panel_2.setLayout(gl_panel_2);
 				
+				// departement
 				JPanel panel_3 = new JPanel();
-				panel_3.setBounds(15, 132, 187, 36);
-				panel_6.add(panel_3);
-				
 				JLabel labelDepartementFonction = new JLabel("Departement");
-				
 				JTextField departementFonction = new JTextField();
 				departementFonction.setColumns(10);
 				labelDepartementFonction.setLabelFor(departementFonction);
@@ -135,12 +136,10 @@ public class VueFonction extends JPanel {
 				);
 				panel_3.setLayout(gl_panel_3);
 				
+				
+				// niveau
 				JPanel panel_4 = new JPanel();
-				panel_4.setBounds(29, 179, 173, 30);
-				panel_6.add(panel_4);
-				
 				JLabel labelNiveauFonction = new JLabel("Niveau");
-				
 				JTextField niveauFonction = new JTextField();
 				niveauFonction.setColumns(10);
 				labelNiveauFonction.setLabelFor(niveauFonction);
@@ -164,22 +163,114 @@ public class VueFonction extends JPanel {
 				);
 				panel_4.setLayout(gl_panel_4);
 				
+				// RTT
 				JPanel panel_5 = new JPanel();
-				panel_5.setBounds(40, 220, 162, 30);
-				panel_6.add(panel_5);
-				
 				JLabel labelRttFonction = new JLabel("RTT");
 				panel_5.add(labelRttFonction);
-				
 				JTextField rttFonction = new JTextField();
 				panel_5.add(rttFonction);
 				rttFonction.setColumns(10);
 				labelRttFonction.setLabelFor(rttFonction);
 				
+				// bouton
+				JButton btnNewButton;
+				if(adresse == null)
+				{
+				btnNewButton = new JButton("Enregistrer");
+				}
+				else {
+
+				date.setText(adresse.getRue());
+				ville.setText(adresse.getVille());
+				postal.setText(adresse.getPostal());
+				btnNewButton = new JButton("Mettre à jour");
+				}
+				GroupLayout gl_panel_6 = new GroupLayout(panel_6);
+				gl_panel_6.setHorizontalGroup(
+					gl_panel_6.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_6.createSequentialGroup()
+							.addGroup(gl_panel_6.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_6.createParallelGroup(Alignment.LEADING, false)
+									.addGroup(gl_panel_6.createSequentialGroup()
+										.addGap(71)
+										.addComponent(labelFonction, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
+									.addGroup(gl_panel_6.createSequentialGroup()
+										.addGap(50)
+										.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+									.addGroup(gl_panel_6.createSequentialGroup()
+										.addGap(50)
+										.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+									.addGroup(gl_panel_6.createSequentialGroup()
+										.addGap(15)
+										.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+									.addGroup(gl_panel_6.createSequentialGroup()
+										.addGap(29)
+										.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+									.addGroup(gl_panel_6.createSequentialGroup()
+										.addGap(40)
+										.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+								.addGroup(gl_panel_6.createSequentialGroup()
+									.addGap(121)
+									.addComponent(btnNewButton)))
+							.addContainerGap(68, Short.MAX_VALUE))
+				);
+				gl_panel_6.setVerticalGroup(
+					gl_panel_6.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_6.createSequentialGroup()
+							.addGap(11)
+							.addComponent(labelFonction)
+							.addGap(11)
+							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+							.addGap(11)
+							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+							.addGap(11)
+							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+							.addGap(11)
+							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addGap(11)
+							.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnNewButton)
+							.addGap(72))
+				);
+				panel_6.setLayout(gl_panel_6);
 				
-				JButton btnNewButton = new JButton("Enregistrer");
-				btnNewButton.setBounds(71, 261, 85, 23);
-				panel_6.add(btnNewButton);
+				//groupLayout
+				GroupLayout gl_panel = new GroupLayout(panel);
+				gl_panel.setHorizontalGroup(
+					gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 351, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(295, Short.MAX_VALUE))
+				);
+				gl_panel.setVerticalGroup(
+					gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 356, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(134, Short.MAX_VALUE))
+				);
+				panel.setLayout(gl_panel);
+				
+				//groupLayout
+				GroupLayout groupLayout = new GroupLayout(this);
+				groupLayout.setHorizontalGroup(
+					groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(82)
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 634, GroupLayout.PREFERRED_SIZE))
+				);
+				groupLayout.setVerticalGroup(
+					groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(5)
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 501, GroupLayout.PREFERRED_SIZE))
+				);
+					
+				
+				
+			
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						GestionDate gestion = new GestionDate();
@@ -195,5 +286,8 @@ public class VueFonction extends JPanel {
 					    
 					}
 				});
+				setLayout(groupLayout);
+				
+				
 	}
 }

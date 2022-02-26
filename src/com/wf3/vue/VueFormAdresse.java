@@ -92,14 +92,18 @@ public class VueFormAdresse extends JPanel {
 				String rueE = rue.getText();
 				String postalE = postal.getText();
 				String villeE = ville.getText();
-				adresse = new Adresse(rueE, postalE, villeE);
-				adresse.setId_employe(employe.getId());
+				
 			
 				if(adresse == null ) {
+					
+					adresse = new Adresse(rueE, postalE, villeE);
+					adresse.setId_employe(employe.getId());
 					JOptionPane.showMessageDialog(panel, "Adresse enregistrée");
 					model.addAdresse(adresse, employe);
 				}
 				else {
+					adresse = new Adresse(rueE, postalE, villeE);
+					adresse.setId_employe(employe.getId());
 					JOptionPane.showMessageDialog(panel, "Adresse mise à jour");
 					model.editAdresse(adresse);
 				}

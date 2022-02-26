@@ -24,7 +24,7 @@ public class FonctionModel extends Model {
 			id = employe.getId();
 			statement = connexion
 					.prepareStatement("INSERT INTO fonction(date, titre, departement, niveau, rtt, id_employe) " 
-			+ "VALUES (?,?,?,?,?)");
+			+ "VALUES (?,?,?,?,?,?)");
 
 			statement.setDate(1, new java.sql.Date(fonction.getDate().getTime()));
 			statement.setString(2, fonction.getTitre());
@@ -51,7 +51,7 @@ public class FonctionModel extends Model {
 			id = employe.getId();
 			Statement statement1 = connexion.createStatement();
 
-			//date, titre, departement, niveau, rtt
+			
 			String query = "SELECT date, titre, departement, "
 					+ "niveau, rtt FROM fonction WHERE id_employe=" + id;
 
@@ -78,25 +78,25 @@ public class FonctionModel extends Model {
 
 	}
 
-	public void editAdresse(Adresse adresse) {
+	public void editFonction(Fonction fonction) {
 
 		Connection connexion = dbConnect();
 
 		PreparedStatement statement;
 		try {
 
-			id = adresse.getId_employe();
+			id = fonction.getId_employe();
 			
-
+			//	titre	rtt	date	niveau	departement	id_employe	
 			statement = connexion.prepareStatement
-				("UPDATE adresse SET " + "Rue=?, Postal=?, Ville=?" 
+				("UPDATE fonction SET " + "titre=?, rtt=?, date=?, niveau=?, departement=?" 
 						+ "WHERE id_employe=" + id);
 
-			statement.setString(1, adresse.getRue());
-			System.out.println(adresse.getRue());
-			statement.setString(2, adresse.getPostal());
-			statement.setString(3, adresse.getVille());
-
+			statement.setString(1, fonction.getTitre());
+			statement.setInt(2, fonction.getRtt());
+			statement.setDate(3,new java.sql.Date(fonction.getDate().getTime()));
+			statement.setInt(4, fonction.getNiveau());
+			statement.setString(5, fonction.getDepartement());
 			statement.executeUpdate();
 
 			statement.close();

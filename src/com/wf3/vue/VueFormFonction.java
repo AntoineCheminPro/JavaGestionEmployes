@@ -14,9 +14,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.wf3.controller.Controller;
 import com.wf3.controller.ControllerFonction;
 import com.wf3.model.Adresse;
 import com.wf3.model.AdresseModel;
@@ -174,17 +176,53 @@ public class VueFormFonction extends JPanel {
 				
 				// bouton
 				JButton btnNewButton;
-				if(adresse == null)
+				if(fonction == null)
 				{
 				btnNewButton = new JButton("Enregistrer");
 				}
 				else {
-
-				date.setText(adresse.getRue());
-				ville.setText(adresse.getVille());
-				postal.setText(adresse.getPostal());
+				GestionDate gestion = new GestionDate();
+				dateFonction.setText(gestion.dateToString(fonction.getDate()));
+				titreFonction.setText(fonction.getTitre());
+				departementFonction.setText(fonction.getDepartement());
+				niveauFonction.setText(String.valueOf(fonction.getNiveau()));
+				rttFonction.setText(String.valueOf(fonction.getRtt()));
 				btnNewButton = new JButton("Mettre à jour");
 				}
+				
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						GestionDate gestion = new GestionDate();
+					
+						Date dateF = gestion.stringToDate(dateFonction.getText());
+						String titreF = titreFonction.getText();
+						String departementF = departementFonction.getText();
+						int niveauF = Integer.parseInt(niveauFonction.getText());
+						int rttF = Integer.parseInt(rttFonction.getText());
+						
+						if(fonction == null ) {
+							
+							fonction = new Fonction(dateF, titreF, departementF, niveauF, rttF);
+							fonction.setId_employe(employe.getId());
+							
+							JOptionPane.showMessageDialog(panel, "Fonction enregistrée");
+							fonctionModel.addFonction(fonction, employe);
+						}
+						else {
+							fonction = new Fonction(dateF, titreF, departementF, niveauF, rttF);
+							fonction.setId_employe(employe.getId());
+							JOptionPane.showMessageDialog(panel, "Fonction mise à jour");
+							fonctionModel.editFonction(fonction);
+						}
+						
+//						vueAllEmployes = new VueAllEmployes(layeredPane);
+						Controller.reload();
+						
+					
+					}
+				});
+				
+				
 				GroupLayout gl_panel_6 = new GroupLayout(panel_6);
 				gl_panel_6.setHorizontalGroup(
 					gl_panel_6.createParallelGroup(Alignment.LEADING)
@@ -271,21 +309,7 @@ public class VueFormFonction extends JPanel {
 				
 				
 			
-				btnNewButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						GestionDate gestion = new GestionDate();
-					
-						Date dateF = gestion.stringToDate(dateFonction.getText());
-						String titreF = titreFonction.getText();
-						String departementF = departementFonction.getText();
-						int niveauF = Integer.parseInt(niveauFonction.getText());
-						int rttF = Integer.parseInt(rttFonction.getText());
-						fonction = new Fonction(dateF, titreF, departementF, niveauF, rttF);
-						
-						
-					    
-					}
-				});
+				
 				setLayout(groupLayout);
 				
 				

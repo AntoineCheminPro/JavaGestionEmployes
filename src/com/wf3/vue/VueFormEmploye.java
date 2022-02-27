@@ -31,8 +31,6 @@ import javax.swing.JSpinner;
 
 public class VueFormEmploye extends JPanel {
 
-
-	private ControllerEmploye controllerEmploye;
 	private JLabel labelNom;
 	private JTextField nom;
 	private JTextField prenom;
@@ -44,35 +42,36 @@ public class VueFormEmploye extends JPanel {
 	private JTextField textField;
 	private VueAllEmployes vueAllEmployes;
 	private JLayeredPane layeredPane;
+	private ControllerEmploye controllerEmploye;
 
 	/**
 	 * Create the frame.
 	 */
 	public VueFormEmploye(ControllerEmploye controllerEmploye, JLayeredPane layeredPane) {
 		
-	//	this.controllerEmploye = controllerEmploye;
+	
 		this.layeredPane = layeredPane;
 		
-		ButtonGroup Group = new ButtonGroup();
+		
 		
 		JPanel panel_7 = new JPanel();
 		
+		//nom
 		JPanel panel = new JPanel();
-		
 		labelNom = new JLabel("Nom");
-		
 		nom = new JTextField();
 		nom.setColumns(10);
 		labelNom.setLabelFor(nom);
 		
+		//prenom
 		labelPrenom = new JLabel("Prenom");
-		
 		JTextField prenom_1 = new JTextField();
 		prenom_1.setColumns(10);
 		labelPrenom.setLabelFor(prenom_1);
 		
+		//sexe / radiobutton
 		JPanel panel_1 = new JPanel();
-		
+		ButtonGroup Group = new ButtonGroup();
 		JLabel labelSexe = new JLabel("Sexe");
 		JRadioButton homme = new JRadioButton("Homme");
 		Group.add(homme);
@@ -101,10 +100,10 @@ public class VueFormEmploye extends JPanel {
 		);
 		panel_1.setLayout(gl_panel_1);
 		
+		
+		// date de naissance
 		JPanel panel_2 = new JPanel();
-		
 		JLabel labelDateNaissance = new JLabel("Date de naissance");
-		
 		JTextField dateNaissance_1 = new JTextField();
 		dateNaissance_1.setColumns(10);
 		labelDateNaissance.setLabelFor(dateNaissance_1);
@@ -128,10 +127,9 @@ public class VueFormEmploye extends JPanel {
 		);
 		panel_2.setLayout(gl_panel_2);
 		
+		// code
 		JPanel panel_3 = new JPanel();
-		
 		JLabel labelCode = new JLabel("Code");
-		
 		JTextField code_1 = new JTextField();
 		code_1.setColumns(10);
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
@@ -154,10 +152,10 @@ public class VueFormEmploye extends JPanel {
 		);
 		panel_3.setLayout(gl_panel_3);
 		
+		
+		//quotite
 		JPanel panel_4 = new JPanel();
-		
 		JLabel labelQuotite = new JLabel("Quotite");
-		
 		JTextField quotite_1 = new JTextField();
 		quotite_1.setColumns(10);
 		labelQuotite.setLabelFor(quotite_1);
@@ -181,10 +179,10 @@ public class VueFormEmploye extends JPanel {
 		);
 		panel_4.setLayout(gl_panel_4);
 		
+		
+		// date d'empbauche
 		JPanel panel_5 = new JPanel();
-		
 		JLabel labelDateEmbauche = new JLabel("Date d'embauche");
-		
 		JTextField dateEmbauche_1 = new JTextField();
 		dateEmbauche_1.setColumns(10);
 		labelDateEmbauche.setLabelFor(dateEmbauche_1);
@@ -208,8 +206,9 @@ public class VueFormEmploye extends JPanel {
 		);
 		panel_5.setLayout(gl_panel_5);
 		
-		JPanel panel_6 = new JPanel();
 		
+		// button enregistrer
+		JPanel panel_6 = new JPanel();
 		JButton btnNewButton = new JButton("Enregistrer");
 		btnNewButton.setBackground(Color.GREEN);
 		GroupLayout gl_panel_6 = new GroupLayout(panel_6);
@@ -226,9 +225,11 @@ public class VueFormEmploye extends JPanel {
 					.addComponent(btnNewButton))
 		);
 		panel_6.setLayout(gl_panel_6);
+		
+		
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				GestionDate gestion = new GestionDate();
 				String nomE = nom.getText();
 				String prenomE = prenom_1.getText();
@@ -247,7 +248,6 @@ public class VueFormEmploye extends JPanel {
 				EmployeModel model = new EmployeModel();
 				model.addEmploye(employe);
 				JOptionPane.showMessageDialog(panel_1, "Employé créé");
-				
 				vueAllEmployes = new VueAllEmployes(layeredPane);
 				switchScreen(vueAllEmployes);
 			}
@@ -312,6 +312,8 @@ public class VueFormEmploye extends JPanel {
 					.addGap(52))
 		);
 		panel.setLayout(gl_panel);
+		
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

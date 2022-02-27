@@ -12,24 +12,30 @@ import java.sql.Statement;
 
 public class SalaireModel extends Model {
 
-	public int addSalaire(Salaire salaire) {
+	private Employe employe;
+	private int id;
+	private Salaire salaire;
+	
+	
+	public int addSalaire(Salaire salaire, Employe employe) {
 
 		Connection connexion = dbConnect();
 
 		PreparedStatement statement;
 		try {
 			if (connexion != null) {
-
+				id = employe.getId();
+				
 				statement = connexion.prepareStatement(
-						"INSERT INTO salaire " + "(dateDebut, dateFin, chargesPatronales, chargesSalariales, brut) "
+						"INSERT INTO salaire " + "(dateDebut, dateFin, chargesPatronales, chargesSalariales, brut,  id_employe) "
 								+ "VALUES (?, ?, ?, ?, ?, ?)");
 
 				statement.setDate(1, new java.sql.Date(salaire.getDateDebut().getTime()));
 				statement.setDate(2, new java.sql.Date(salaire.getDateFin().getTime()));
-				statement.setFloat(4, salaire.getChargesPatronales());
-				statement.setFloat(5, salaire.getChargesSalariales());
-				statement.setFloat(6, salaire.getBrut());
-
+				statement.setFloat(3, salaire.getChargesPatronales());
+				statement.setFloat(4, salaire.getChargesSalariales());
+				statement.setFloat(5, salaire.getBrut());
+				statement.setInt(6, id);
 				statement.executeUpdate();
 
 				statement.close();
@@ -58,8 +64,8 @@ public class SalaireModel extends Model {
 			statement.setDate(1, new java.sql.Date(salaire.getDateDebut().getTime()));
 			statement.setDate(2, new java.sql.Date(salaire.getDateFin().getTime()));
 			statement.setFloat(3, salaire.getChargesPatronales());
-			statement.setFloat(3, salaire.getChargesSalariales());
-			statement.setFloat(3, salaire.getBrut());
+			statement.setFloat(4, salaire.getChargesSalariales());
+			statement.setFloat(5, salaire.getBrut());
 			statement.executeUpdate();
 
 			statement.close();
@@ -73,6 +79,40 @@ public class SalaireModel extends Model {
 		return 1;
 
 	}
+	
+	public Salaire verifSalaire(Employe employe) throws ParseException {
+
+		Connection connexion = dbConnect();
+
+		try {
+			id = employe.getId();
+			Statement statement1 = connexion.createStatement();
+
+			
+			String query = "SELECT dateDebut, dateFin, chargesPatronales, chargesSalariales, brut FROM salaire WHERE id_employe=" + id;
+
+			ResultSet resultat = statement1.executeQuery(query);
+
+			if (resultat.next()) {
+				salaire = new Salaire(new SimpleDateFormat("yyyy-mm-dd").parse(resultat.getString("dateDebut")),
+						new SimpleDateFormat("yyyy-mm-dd").parse(resultat.getString("dateFin")),
+						resultat.getFloat("chargesPatronales"),
+						resultat.getFloat("chargesSalariales"),
+						resultat.getFloat("brut"));
+
+				return salaire;
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+
+	}
+
 
 	public int deleteSalaire(int id) throws ParseException {
 

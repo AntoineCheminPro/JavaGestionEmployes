@@ -19,6 +19,8 @@ import com.wf3.model.EmployeModel;
 import com.wf3.model.Fonction;
 import com.wf3.model.FonctionModel;
 import com.wf3.model.ModelDynamiqueEmploye;
+import com.wf3.model.Salaire;
+import com.wf3.model.SalaireModel;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -40,7 +42,7 @@ public class VueAllEmployes extends JPanel {
 	private JLayeredPane layeredPane;
 	private Adresse adresse;
 	private Fonction fonction;
-
+	private Salaire salaire;
 	
 	public VueAllEmployes(JLayeredPane layeredPane) {
 		this.layeredPane = layeredPane;
@@ -148,8 +150,54 @@ public class VueAllEmployes extends JPanel {
 		JButton btnNewButton_4 = new JButton("Cong\u00E9s");
 		btnNewButton_4.setBackground(Color.GREEN);
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		JButton btnNewButton_5 = new JButton("Salaires");
 		btnNewButton_5.setBackground(Color.GREEN);
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectionModel().isSelectionEmpty()) {
+					JOptionPane.showMessageDialog(layeredPane, "Selectionnez une ligne svp", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					
+					EmployeModel employeMod = new EmployeModel();
+					Employe employe;
+										
+					try {
+						employe = employeMod.OneEmployeById(getEmployeIdFromRow());
+						SalaireModel salaireModel = new SalaireModel();
+						salaire = salaireModel.verifSalaire(employe);
+					
+						switchToEditSalaireScreen(employe, layeredPane);
+					} catch (ParseException e1) {
+						JOptionPane.showMessageDialog(layeredPane, "Aucun employé selectionné", "Error", JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					}
+					
+					}
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+		
 		table = new JTable(modelDynEmploye);
 		table.setBackground(Color.WHITE);
 		JScrollPane scroll = new JScrollPane(table);
@@ -248,6 +296,15 @@ public void switchToEditFonctionScreen(Employe employe, JLayeredPane layeredPane
 	    layeredPane.repaint();
 	    layeredPane.revalidate();
 	}
+
+public void switchToEditSalaireScreen(Employe employe, JLayeredPane layeredPane) throws ParseException {
+	
+	VueFormSalaire vueFormSalaire = new VueFormSalaire(employe, layeredPane);
+    layeredPane.removeAll();
+    layeredPane.add(vueFormSalaire);
+    layeredPane.repaint();
+    layeredPane.revalidate();
+}
 	
 	public void deleteEmploye() {
 	   

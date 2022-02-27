@@ -2,279 +2,275 @@ package com.wf3.vue;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-
 import com.wf3.controller.ControllerEmploye;
-import com.wf3.model.Adresse;
-import com.wf3.model.Conges;
 import com.wf3.model.Employe;
-import com.wf3.model.Fonction;
+import com.wf3.model.EmployeModel;
 import com.wf3.model.GestionDate;
 import com.wf3.model.Salaire;
+import com.wf3.model.SalaireModel;
+
 import java.awt.Color;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import javax.swing.JSpinner;
+
+
 
 public class VueFormSalaire extends JPanel {
 
-	private JPanel panel;
-	private ControllerSalaire controllerSalaire;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-
+	private JLabel labelDateDebut;
+	private JTextField DateDebut;
 	
+	private JLabel labelDateFin;
+	private JTextField DateFin;
+	private VueAllEmployes vueAllEmployes;
+	private JLayeredPane layeredPane;
+	private Employe employe;
 
 	/**
 	 * Create the frame.
 	 */
-	public VueFormSalaire(ControllerSalaire controlleSalaire, JLayeredPane layeredPane) {
-		this.controllerSalaire = controllerSalaire;
+	public VueFormSalaire(Employe employe, JLayeredPane layeredPane) {
+		
+	
 		this.layeredPane = layeredPane;
+		this.employe = employe;
 		
-		panel = new JPanel();
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(Color.YELLOW);
-		panel.add(panel_3);
+		JPanel panel_7 = new JPanel();
 		
-		JPanel panel_1 = new JPanel();
+		//nom
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.YELLOW);
+		labelDateDebut = new JLabel("DateDebut");
+		DateDebut = new JTextField();
+		labelDateDebut.setLabelFor(DateDebut);
+		DateDebut.setColumns(10);
 		
-		JLabel labelSalaire = new JLabel("Salaire");
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 216, Short.MAX_VALUE)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(92)
-					.addComponent(labelSalaire))
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 35, Short.MAX_VALUE)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(5)
-					.addComponent(labelSalaire))
-		);
-		panel_1.setLayout(gl_panel_1);
+		//prenom
+		labelDateFin = new JLabel("DateFin");
+		DateFin = new JTextField();
+		DateFin.setColumns(10);
+		labelDateFin.setLabelFor(DateFin);
+		ButtonGroup Group = new ButtonGroup();
 		
+		
+		// date de naissance
 		JPanel panel_2 = new JPanel();
-		
-		JLabel labelDebutSalaire = new JLabel("Debut");
-		
-		textField = new JTextField();
-		textField.setColumns(10);
+		JLabel labelChargesSalariales = new JLabel("Charges Salariales");
+		JTextField chargesSalariales = new JTextField();
+		chargesSalariales.setColumns(10);
+		labelChargesSalariales.setLabelFor(chargesSalariales);
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 216, Short.MAX_VALUE)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGap(48)
-					.addComponent(labelDebutSalaire)
-					.addGap(5)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap()
+					.addComponent(labelChargesSalariales)
+					.addGap(35)
+					.addComponent(chargesSalariales, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 26, Short.MAX_VALUE)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGap(8)
-					.addComponent(labelDebutSalaire))
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addGap(5)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(labelChargesSalariales)
+						.addComponent(chargesSalariales, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 		);
 		panel_2.setLayout(gl_panel_2);
 		
-		JPanel panel_2_1 = new JPanel();
-		
-		JLabel labelFinSalaire = new JLabel("Fin");
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		GroupLayout gl_panel_2_1 = new GroupLayout(panel_2_1);
-		gl_panel_2_1.setHorizontalGroup(
-			gl_panel_2_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 216, Short.MAX_VALUE)
-				.addGroup(gl_panel_2_1.createSequentialGroup()
-					.addGap(55)
-					.addComponent(labelFinSalaire)
-					.addGap(5)
-					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		);
-		gl_panel_2_1.setVerticalGroup(
-			gl_panel_2_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 26, Short.MAX_VALUE)
-				.addGroup(gl_panel_2_1.createSequentialGroup()
-					.addGap(8)
-					.addComponent(labelFinSalaire))
-				.addGroup(gl_panel_2_1.createSequentialGroup()
-					.addGap(5)
-					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		);
-		panel_2_1.setLayout(gl_panel_2_1);
-		
-		JPanel panel_2_2 = new JPanel();
-		
-		JLabel labelChargesP = new JLabel("Charges patronales");
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		GroupLayout gl_panel_2_2 = new GroupLayout(panel_2_2);
-		gl_panel_2_2.setHorizontalGroup(
-			gl_panel_2_2.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 216, Short.MAX_VALUE)
-				.addGroup(gl_panel_2_2.createSequentialGroup()
-					.addGap(15)
-					.addComponent(labelChargesP)
-					.addGap(5)
-					.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		);
-		gl_panel_2_2.setVerticalGroup(
-			gl_panel_2_2.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 26, Short.MAX_VALUE)
-				.addGroup(gl_panel_2_2.createSequentialGroup()
-					.addGap(8)
-					.addComponent(labelChargesP))
-				.addGroup(gl_panel_2_2.createSequentialGroup()
-					.addGap(5)
-					.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		);
-		panel_2_2.setLayout(gl_panel_2_2);
-		
-		JPanel panel_2_2_1 = new JPanel();
-		
-		JLabel labelChargesS = new JLabel("Charges salariales");
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		GroupLayout gl_panel_2_2_1 = new GroupLayout(panel_2_2_1);
-		gl_panel_2_2_1.setHorizontalGroup(
-			gl_panel_2_2_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 216, Short.MAX_VALUE)
-				.addGroup(gl_panel_2_2_1.createSequentialGroup()
-					.addGap(19)
-					.addComponent(labelChargesS)
-					.addGap(5)
-					.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		);
-		gl_panel_2_2_1.setVerticalGroup(
-			gl_panel_2_2_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 26, Short.MAX_VALUE)
-				.addGroup(gl_panel_2_2_1.createSequentialGroup()
-					.addGap(8)
-					.addComponent(labelChargesS))
-				.addGroup(gl_panel_2_2_1.createSequentialGroup()
-					.addGap(5)
-					.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		);
-		panel_2_2_1.setLayout(gl_panel_2_2_1);
-		
-		JPanel panel_2_2_1_1 = new JPanel();
-		
-		JLabel labelBrut = new JLabel("Brut");
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		GroupLayout gl_panel_2_2_1_1 = new GroupLayout(panel_2_2_1_1);
-		gl_panel_2_2_1_1.setHorizontalGroup(
-			gl_panel_2_2_1_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 216, Short.MAX_VALUE)
-				.addGroup(gl_panel_2_2_1_1.createSequentialGroup()
-					.addGap(52)
-					.addComponent(labelBrut)
-					.addGap(5)
-					.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		);
-		gl_panel_2_2_1_1.setVerticalGroup(
-			gl_panel_2_2_1_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 26, Short.MAX_VALUE)
-				.addGroup(gl_panel_2_2_1_1.createSequentialGroup()
-					.addGap(8)
-					.addComponent(labelBrut))
-				.addGroup(gl_panel_2_2_1_1.createSequentialGroup()
-					.addGap(5)
-					.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		);
-		panel_2_2_1_1.setLayout(gl_panel_2_2_1_1);
-		
-		JPanel panel_2_2_1_1_1 = new JPanel();
-		
-		JButton btnNewButton = new JButton("Enregistrer");
-		GroupLayout gl_panel_2_2_1_1_1 = new GroupLayout(panel_2_2_1_1_1);
-		gl_panel_2_2_1_1_1.setHorizontalGroup(
-			gl_panel_2_2_1_1_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 216, Short.MAX_VALUE)
-				.addGroup(gl_panel_2_2_1_1_1.createSequentialGroup()
-					.addGap(65)
-					.addComponent(btnNewButton))
-		);
-		gl_panel_2_2_1_1_1.setVerticalGroup(
-			gl_panel_2_2_1_1_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 26, Short.MAX_VALUE)
-				.addGroup(gl_panel_2_2_1_1_1.createSequentialGroup()
-					.addGap(5)
-					.addComponent(btnNewButton))
-		);
-		panel_2_2_1_1_1.setLayout(gl_panel_2_2_1_1_1);
+		// code
+		JPanel panel_3 = new JPanel();
+		JLabel labelChargesPatronales = new JLabel("Charges Patronales");
+		JTextField ChargesPatronales = new JTextField();
+		ChargesPatronales.setColumns(10);
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 377, Short.MAX_VALUE)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(83)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(83)
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(83)
-					.addComponent(panel_2_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(83)
-					.addComponent(panel_2_2, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(79)
-					.addComponent(panel_2_2_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(79)
-					.addComponent(panel_2_2_1_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(79)
-					.addComponent(panel_2_2_1_1_1, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap()
+					.addComponent(labelChargesPatronales)
+					.addGap(18)
+					.addComponent(ChargesPatronales, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(78))
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 307, Short.MAX_VALUE)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(25)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addGap(4)
-					.addComponent(panel_2_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addComponent(panel_2_2, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addComponent(panel_2_2_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addComponent(panel_2_2_1_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addComponent(panel_2_2_1_1_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+					.addGap(8)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
+						.addComponent(labelChargesPatronales)
+						.addComponent(ChargesPatronales, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 		);
 		panel_3.setLayout(gl_panel_3);
+		
+		
+		//quotite
+		JPanel panel_4 = new JPanel();
+		JLabel labelBrut = new JLabel("Brut");
+		JTextField brut = new JTextField();
+		brut.setColumns(10);
+		labelBrut.setLabelFor(brut);
+		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
+		gl_panel_4.setHorizontalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addGap(76)
+					.addComponent(labelBrut)
+					.addGap(19)
+					.addComponent(brut, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		gl_panel_4.setVerticalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addGap(8)
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
+						.addComponent(labelBrut, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE)
+						.addComponent(brut, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+		);
+		panel_4.setLayout(gl_panel_4);
+		
+		
+		// button enregistrer
+		JPanel panel_6 = new JPanel();
+		JButton btnNewButton = new JButton("Enregistrer");
+		btnNewButton.setBackground(Color.GREEN);
+		GroupLayout gl_panel_6 = new GroupLayout(panel_6);
+		gl_panel_6.setHorizontalGroup(
+			gl_panel_6.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_6.createSequentialGroup()
+					.addGap(97)
+					.addComponent(btnNewButton))
+		);
+		gl_panel_6.setVerticalGroup(
+			gl_panel_6.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_6.createSequentialGroup()
+					.addGap(5)
+					.addComponent(btnNewButton))
+		);
+		panel_6.setLayout(gl_panel_6);
+		
+		
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				GestionDate gestion = new GestionDate();
+				Date dateDebutE = gestion.stringToDate(DateDebut.getText());
+				Date dateFinE = gestion.stringToDate(DateFin.getText());
+				Float chargesPatronalesE = Float.parseFloat(ChargesPatronales.getText());
+				Float chargesSalarialesE = Float.parseFloat(chargesSalariales.getText());
+				Float brutE = Float.parseFloat(brut.getText());
+				int id_employeE = employe.getId();
+
+				Salaire salaire = new Salaire(dateDebutE, dateFinE, chargesPatronalesE, chargesSalarialesE, brutE);
+				salaire.setId_employe(id_employeE);
+				SalaireModel model = new SalaireModel();
+				model.addSalaire(salaire, employe);
+				JOptionPane.showMessageDialog(panel, "Salaire créé");
+				
+				vueAllEmployes = new VueAllEmployes(layeredPane);
+				switchScreen(vueAllEmployes);
+			}
+		});
+		
+		
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(75)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+					.addGap(91)
+					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 365, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(244)
+							.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 337, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(110)
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 319, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(27, Short.MAX_VALUE))
+		);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(18)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(labelDateDebut)
+							.addGap(42)
+							.addComponent(DateDebut, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(labelDateFin)
+							.addGap(57)
+							.addComponent(DateFin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE)
+							.addComponent(panel_6, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE))))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(8)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(3)
+							.addComponent(labelDateDebut))
+						.addComponent(DateDebut, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(29)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(6)
+							.addComponent(labelDateFin))
+						.addComponent(DateFin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(11)
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+					.addGap(26)
+					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addGap(32)
+					.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		);
+		panel.setLayout(gl_panel);
+		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
+		setLayout(groupLayout);
+		
+	}
+	
+	public void switchScreen(JPanel panelToUpload) {
+		this.removeAll();
+		this.add(panelToUpload);
+		this.repaint();
+		this.revalidate();
 	}
 }
+

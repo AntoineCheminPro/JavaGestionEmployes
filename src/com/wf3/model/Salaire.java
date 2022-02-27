@@ -10,6 +10,8 @@ public class Salaire {
 	private float chargesPatronales;
 	private float chargesSalariales;
 	private float brut;
+	private int id;
+	private int id_employe;
 
 	public float salaireCharge() {
 		float chargesTotales = this.chargesPatronales + this.chargesSalariales;
@@ -77,6 +79,22 @@ public class Salaire {
 
 	public void setBrut(float brut) {
 		this.brut = brut;
+	}
+
+	public int getId_employe() {
+		return id_employe;
+	}
+
+	public void setId_employe(int id_employe) {
+		this.id_employe = id_employe;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

@@ -50,31 +50,14 @@ public class VueFormEmploye extends JPanel {
 	 */
 	public VueFormEmploye(ControllerEmploye controllerEmploye, JLayeredPane layeredPane) {
 		
-		this.controllerEmploye = controllerEmploye;
+	//	this.controllerEmploye = controllerEmploye;
 		this.layeredPane = layeredPane;
 		
 		ButtonGroup Group = new ButtonGroup();
 		
 		JPanel panel_7 = new JPanel();
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(277)
-					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 365, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(175, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(244)
-					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 337, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(212, Short.MAX_VALUE))
-		);
-		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JPanel panel = new JPanel();
-		panel_7.add(panel);
 		
 		labelNom = new JLabel("Nom");
 		
@@ -84,9 +67,9 @@ public class VueFormEmploye extends JPanel {
 		
 		labelPrenom = new JLabel("Prenom");
 		
-		JTextField prenom = new JTextField();
-		prenom.setColumns(10);
-		labelPrenom.setLabelFor(prenom);
+		JTextField prenom_1 = new JTextField();
+		prenom_1.setColumns(10);
+		labelPrenom.setLabelFor(prenom_1);
 		
 		JPanel panel_1 = new JPanel();
 		
@@ -122,9 +105,9 @@ public class VueFormEmploye extends JPanel {
 		
 		JLabel labelDateNaissance = new JLabel("Date de naissance");
 		
-		JTextField dateNaissance = new JTextField();
-		dateNaissance.setColumns(10);
-		labelDateNaissance.setLabelFor(dateNaissance);
+		JTextField dateNaissance_1 = new JTextField();
+		dateNaissance_1.setColumns(10);
+		labelDateNaissance.setLabelFor(dateNaissance_1);
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -132,7 +115,7 @@ public class VueFormEmploye extends JPanel {
 					.addContainerGap()
 					.addComponent(labelDateNaissance)
 					.addGap(35)
-					.addComponent(dateNaissance, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(dateNaissance_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		gl_panel_2.setVerticalGroup(
@@ -141,7 +124,7 @@ public class VueFormEmploye extends JPanel {
 					.addGap(5)
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
 						.addComponent(labelDateNaissance)
-						.addComponent(dateNaissance, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(dateNaissance_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 		);
 		panel_2.setLayout(gl_panel_2);
 		
@@ -149,8 +132,8 @@ public class VueFormEmploye extends JPanel {
 		
 		JLabel labelCode = new JLabel("Code");
 		
-		JTextField code = new JTextField();
-		code.setColumns(10);
+		JTextField code_1 = new JTextField();
+		code_1.setColumns(10);
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
@@ -158,7 +141,7 @@ public class VueFormEmploye extends JPanel {
 					.addGap(82)
 					.addComponent(labelCode)
 					.addGap(24)
-					.addComponent(code, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(code_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		gl_panel_3.setVerticalGroup(
@@ -167,7 +150,7 @@ public class VueFormEmploye extends JPanel {
 					.addGap(8)
 					.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
 						.addComponent(labelCode)
-						.addComponent(code, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(code_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 		);
 		panel_3.setLayout(gl_panel_3);
 		
@@ -175,9 +158,9 @@ public class VueFormEmploye extends JPanel {
 		
 		JLabel labelQuotite = new JLabel("Quotite");
 		
-		JTextField quotite = new JTextField();
-		quotite.setColumns(10);
-		labelQuotite.setLabelFor(quotite);
+		JTextField quotite_1 = new JTextField();
+		quotite_1.setColumns(10);
+		labelQuotite.setLabelFor(quotite_1);
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
@@ -185,7 +168,7 @@ public class VueFormEmploye extends JPanel {
 					.addGap(76)
 					.addComponent(labelQuotite)
 					.addGap(19)
-					.addComponent(quotite, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(quotite_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		gl_panel_4.setVerticalGroup(
@@ -194,7 +177,7 @@ public class VueFormEmploye extends JPanel {
 					.addGap(8)
 					.addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
 						.addComponent(labelQuotite)
-						.addComponent(quotite, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(quotite_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 		);
 		panel_4.setLayout(gl_panel_4);
 		
@@ -202,9 +185,9 @@ public class VueFormEmploye extends JPanel {
 		
 		JLabel labelDateEmbauche = new JLabel("Date d'embauche");
 		
-		JTextField dateEmbauche = new JTextField();
-		dateEmbauche.setColumns(10);
-		labelDateEmbauche.setLabelFor(dateEmbauche);
+		JTextField dateEmbauche_1 = new JTextField();
+		dateEmbauche_1.setColumns(10);
+		labelDateEmbauche.setLabelFor(dateEmbauche_1);
 		GroupLayout gl_panel_5 = new GroupLayout(panel_5);
 		gl_panel_5.setHorizontalGroup(
 			gl_panel_5.createParallelGroup(Alignment.LEADING)
@@ -212,7 +195,7 @@ public class VueFormEmploye extends JPanel {
 					.addGap(24)
 					.addComponent(labelDateEmbauche)
 					.addGap(24)
-					.addComponent(dateEmbauche, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(dateEmbauche_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		gl_panel_5.setVerticalGroup(
@@ -221,7 +204,7 @@ public class VueFormEmploye extends JPanel {
 					.addGap(5)
 					.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
 						.addComponent(labelDateEmbauche)
-						.addComponent(dateEmbauche, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(dateEmbauche_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 		);
 		panel_5.setLayout(gl_panel_5);
 		
@@ -248,17 +231,17 @@ public class VueFormEmploye extends JPanel {
 				
 				GestionDate gestion = new GestionDate();
 				String nomE = nom.getText();
-				String prenomE = prenom.getText();
+				String prenomE = prenom_1.getText();
 				int sexeE = 0;
 				if(homme.isSelected()) {
 					sexeE = 1;
 				} else {
 					sexeE = 2;
 				}
-				Date dateNaissanceE = gestion.stringToDate(dateNaissance.getText());
-				String codeE = code.getText();
-				int quotiteE = Integer.parseInt(quotite.getText());
-				Date dateEmbaucheE = gestion.stringToDate(dateEmbauche.getText());
+				Date dateNaissanceE = gestion.stringToDate(dateNaissance_1.getText());
+				String codeE = code_1.getText();
+				int quotiteE = Integer.parseInt(quotite_1.getText());
+				Date dateEmbaucheE = gestion.stringToDate(dateEmbauche_1.getText());
 
 				Employe employe = new Employe(nomE, prenomE, sexeE, dateNaissanceE, dateEmbaucheE, quotiteE, codeE);
 				EmployeModel model = new EmployeModel();
@@ -282,7 +265,7 @@ public class VueFormEmploye extends JPanel {
 							.addGap(5)
 							.addComponent(labelPrenom)
 							.addGap(5)
-							.addComponent(prenom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addComponent(prenom_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(44)
 							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE))
@@ -313,7 +296,7 @@ public class VueFormEmploye extends JPanel {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(3)
 							.addComponent(labelPrenom))
-						.addComponent(prenom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(prenom_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
@@ -329,6 +312,29 @@ public class VueFormEmploye extends JPanel {
 					.addGap(52))
 		);
 		panel.setLayout(gl_panel);
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(65)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 365, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 365, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(273, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(244)
+							.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 337, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(107)
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(212, Short.MAX_VALUE))
+		);
+		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
 		setLayout(groupLayout);
 		
 	}

@@ -68,6 +68,8 @@ public class VueAllEmployes extends JPanel {
 		
 		JPanel panel = new JPanel();
 		
+		
+		// bouton supprimer employé
 		JButton btnNewButton = new JButton("supprimer");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -77,6 +79,7 @@ public class VueAllEmployes extends JPanel {
 		});
 		btnNewButton.setBackground(Color.RED);
 		
+		// bouton éditer employé
 		JButton btnNewButton_1 = new JButton("Editer");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -90,6 +93,7 @@ public class VueAllEmployes extends JPanel {
 		});
 		btnNewButton_1.setBackground(Color.YELLOW);
 		
+		// bouton adresse
 		JButton btnNewButton_2 = new JButton("Adresse");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,6 +121,7 @@ public class VueAllEmployes extends JPanel {
 		});
 		btnNewButton_2.setBackground(Color.GREEN);	
 		
+		// bouton fonction
 		JButton btnNewButton_3 = new JButton("fonction");
 		btnNewButton_3.setBackground(Color.GREEN);
 		btnNewButton_3.addActionListener(new ActionListener() {
@@ -146,24 +151,13 @@ public class VueAllEmployes extends JPanel {
 		
 		
 		
-		
+		// bouton congés
 		JButton btnNewButton_4 = new JButton("Cong\u00E9s");
 		btnNewButton_4.setBackground(Color.GREEN);
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		// bouton salaires
 		JButton btnNewButton_5 = new JButton("Salaires");
 		btnNewButton_5.setBackground(Color.GREEN);
 		btnNewButton_5.addActionListener(new ActionListener() {
@@ -181,7 +175,7 @@ public class VueAllEmployes extends JPanel {
 						SalaireModel salaireModel = new SalaireModel();
 						salaire = salaireModel.verifSalaire(employe);
 					
-						switchToEditSalaireScreen(employe, layeredPane);
+						switchToAllSalaireFromOneEmployeScreen(employe, layeredPane);
 					} catch (ParseException e1) {
 						JOptionPane.showMessageDialog(layeredPane, "Aucun employé selectionné", "Error", JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
@@ -194,10 +188,7 @@ public class VueAllEmployes extends JPanel {
 		
 		
 		
-		
-		
-		
-		
+		// create table with all employes
 		table = new JTable(modelDynEmploye);
 		table.setBackground(Color.WHITE);
 		JScrollPane scroll = new JScrollPane(table);
@@ -297,7 +288,7 @@ public void switchToEditFonctionScreen(Employe employe, JLayeredPane layeredPane
 	    layeredPane.revalidate();
 	}
 
-public void switchToEditSalaireScreen(Employe employe, JLayeredPane layeredPane) throws ParseException {
+public void switchToNewSalaireFormScreen(Employe employe, JLayeredPane layeredPane) throws ParseException {
 	
 	VueFormSalaire vueFormSalaire = new VueFormSalaire(employe, layeredPane);
     layeredPane.removeAll();
@@ -305,7 +296,14 @@ public void switchToEditSalaireScreen(Employe employe, JLayeredPane layeredPane)
     layeredPane.repaint();
     layeredPane.revalidate();
 }
+public void switchToAllSalaireFromOneEmployeScreen(Employe employe, JLayeredPane layeredPane) {
+	VueAllSalairesForOneEmploye vueAllSalairesForOneEmploye = new VueAllSalairesForOneEmploye(employe, layeredPane);
+    layeredPane.removeAll();
+    layeredPane.add(vueAllSalairesForOneEmploye);
+    layeredPane.repaint();
+    layeredPane.revalidate();
 	
+};
 	public void deleteEmploye() {
 	   
 	    EmployeModel employeMod = new EmployeModel();

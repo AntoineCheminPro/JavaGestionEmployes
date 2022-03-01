@@ -135,7 +135,7 @@ public class SalaireModel extends Model {
 		return 0;
 	}
 
-	public ArrayList<Salaire> getAllSalaires() throws ParseException {
+	public ArrayList<Salaire> getAllSalaires(int id_employe) throws ParseException {
 		Connection connexion = dbConnect();
 
 		PreparedStatement statement;
@@ -147,7 +147,8 @@ public class SalaireModel extends Model {
 
 				// prepare SQL query
 				String query = "SELECT id, dateDebut, dateFin, chargesPatronales, chargesSalariales, brut"
-						+ " FROM salaire";
+						+ " FROM salaire "
+						+ "WHERE id_employe="+id_employe;
 				ResultSet resultat = st.executeQuery(query);
 
 				ArrayList<Salaire> salaires = new ArrayList<Salaire>();
@@ -156,7 +157,7 @@ public class SalaireModel extends Model {
 					
 					Salaire salaire = new Salaire(new SimpleDateFormat("yyyy-mm-dd").parse(resultat.getString("dateDebut")),
 							new SimpleDateFormat("yyyy-mm-dd").parse(resultat.getString("dateFin")),
-							resultat.getFloat("chagesPatronales"), resultat.getFloat("chargesSalariales"), resultat.getFloat("brut"));
+							resultat.getFloat("chargesPatronales"), resultat.getFloat("chargesSalariales"), resultat.getFloat("brut"));
 					salaire.setId(resultat.getInt("id"));
 					salaires.add(salaire);
 				}
@@ -177,7 +178,7 @@ public class SalaireModel extends Model {
 		return null;
 	}
 
-	public Salaire OneSalaireeById(int choosen_id) throws ParseException {
+	public Salaire OneSalaireById(int choosen_id) throws ParseException {
 
 		Connection connexion = dbConnect();
 
@@ -201,7 +202,7 @@ public class SalaireModel extends Model {
 					
 					Salaire salaire = new Salaire(new SimpleDateFormat("yyyy-mm-dd").parse(resultat.getString("dateDebut")),
 							new SimpleDateFormat("yyyy-mm-dd").parse(resultat.getString("dateFin")),
-							resultat.getFloat("chagesPatronales"), resultat.getFloat("chargesSalariales"), resultat.getFloat("brut"));
+							resultat.getFloat("chargesPatronales"), resultat.getFloat("chargesSalariales"), resultat.getFloat("brut"));
 					salaire.setId(choosen_id);
 					return salaire;
 				}

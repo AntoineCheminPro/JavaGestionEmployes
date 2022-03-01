@@ -1,61 +1,55 @@
 package com.wf3.vue;
 
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+
 import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import com.wf3.controller.ControllerEmploye;
+import javax.swing.GroupLayout.Alignment;
+
+import com.wf3.controller.Controller;
+import com.wf3.controller.ControllerAdresse;
+import com.wf3.model.Adresse;
+import com.wf3.model.AdresseModel;
 import com.wf3.model.Employe;
-import com.wf3.model.EmployeModel;
 import com.wf3.model.GestionDate;
 import com.wf3.model.Salaire;
 import com.wf3.model.SalaireModel;
 
-import java.awt.Color;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
-import javax.swing.JSpinner;
-
-
-
-public class VueFormSalaire extends JPanel {
-
+public class VueFormEditSalaire extends JPanel {
+	public JPanel panel;
+	
 	private JLabel labelDateDebut;
 	private JTextField DateDebut;
 	
 	private JLabel labelDateFin;
 	private JTextField DateFin;
-	private VueAllEmployes vueAllEmployes;
+	private VueAllSalairesForOneEmploye vueAllSalairesForOneEmploye;
 	private JLayeredPane layeredPane;
 	private Employe employe;
-
+	private Salaire salaire;
 	/**
-	 * Create the frame.
+	 * Create the panel.
 	 */
-	public VueFormSalaire(Employe employe, JLayeredPane layeredPane) {
-		
-	
+	public VueFormEditSalaire( Employe employe, Salaire salaire, JLayeredPane layeredPane) {
+
 		this.layeredPane = layeredPane;
 		this.employe = employe;
-		
+		this.salaire = salaire;
 		
 		JPanel panel_7 = new JPanel();
 		
-		//date debut
+		//nom
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.YELLOW);
 		labelDateDebut = new JLabel("DateDebut");
@@ -63,7 +57,7 @@ public class VueFormSalaire extends JPanel {
 		labelDateDebut.setLabelFor(DateDebut);
 		DateDebut.setColumns(10);
 		
-		//date fin
+		//prenom
 		labelDateFin = new JLabel("DateFin");
 		DateFin = new JTextField();
 		DateFin.setColumns(10);
@@ -71,7 +65,7 @@ public class VueFormSalaire extends JPanel {
 		ButtonGroup Group = new ButtonGroup();
 		
 		
-		// charges salariales
+		// date de naissance
 		JPanel panel_2 = new JPanel();
 		JLabel labelChargesSalariales = new JLabel("Charges Salariales");
 		JTextField chargesSalariales = new JTextField();
@@ -97,7 +91,7 @@ public class VueFormSalaire extends JPanel {
 		);
 		panel_2.setLayout(gl_panel_2);
 		
-		// charges patronales
+		// code
 		JPanel panel_3 = new JPanel();
 		JLabel labelChargesPatronales = new JLabel("Charges Patronales");
 		JTextField ChargesPatronales = new JTextField();
@@ -123,7 +117,7 @@ public class VueFormSalaire extends JPanel {
 		panel_3.setLayout(gl_panel_3);
 		
 		
-		//brut
+		//quotite
 		JPanel panel_4 = new JPanel();
 		JLabel labelBrut = new JLabel("Brut");
 		JTextField brut = new JTextField();
@@ -180,16 +174,16 @@ public class VueFormSalaire extends JPanel {
 				Float chargesPatronalesE = Float.parseFloat(ChargesPatronales.getText());
 				Float chargesSalarialesE = Float.parseFloat(chargesSalariales.getText());
 				Float brutE = Float.parseFloat(brut.getText());
-				
 				int id_employeE = employe.getId();
+
 				Salaire salaire = new Salaire(dateDebutE, dateFinE, chargesPatronalesE, chargesSalarialesE, brutE);
 				salaire.setId_employe(id_employeE);
 				SalaireModel model = new SalaireModel();
 				model.addSalaire(salaire, employe);
 				JOptionPane.showMessageDialog(panel, "Salaire créé");
 				
-				vueAllEmployes = new VueAllEmployes(layeredPane);
-				switchScreen(vueAllEmployes);
+				vueAllSalairesForOneEmploye = new VueAllSalairesForOneEmploye(employe, layeredPane);
+				switchScreen(vueAllSalairesForOneEmploye);
 			}
 		});
 		
@@ -273,4 +267,3 @@ public class VueFormSalaire extends JPanel {
 		this.revalidate();
 	}
 }
-

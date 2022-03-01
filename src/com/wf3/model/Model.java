@@ -15,11 +15,11 @@ public abstract class Model {
     
     try {
     	 
-        Connection conn = DriverManager.getConnection(url, user, password);
+        Connection connexion = DriverManager.getConnection(url, user, password);
         
-        if (conn != null) {
+        if (connexion != null) {
             System.out.println("Connected");
-            return conn;
+            return connexion;
           
         }
     } catch (SQLException ex) {

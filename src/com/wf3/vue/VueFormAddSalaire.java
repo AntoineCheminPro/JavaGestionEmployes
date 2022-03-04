@@ -43,11 +43,11 @@ public class VueFormAddSalaire extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public VueFormAddSalaire( Employe employe, Salaire salaire, JLayeredPane layeredPane) {
+	public VueFormAddSalaire( Employe employe, JLayeredPane layeredPane) {
 
 		this.layeredPane = layeredPane;
 		this.employe = employe;
-		this.salaire = salaire;
+		
 		
 		JPanel panel_7 = new JPanel();
 		
@@ -176,18 +176,15 @@ public class VueFormAddSalaire extends JPanel {
 				Float chargesPatronalesE = Float.parseFloat(chargesPatronales.getText());
 				Float chargesSalarialesE = Float.parseFloat(chargesSalariales.getText());
 				Float brutE = Float.parseFloat(brut.getText());
+				Salaire salaire = new Salaire(dateDebutE, dateFinE, 
+						chargesPatronalesE, chargesSalarialesE,
+						brutE);
 				int id_employeE = employe.getId();
 
-				salaire.setDateDebut(dateDebutE);
-				salaire.setDateFin(dateFinE);
-				salaire.setChargesPatronales(chargesPatronalesE);
-				salaire.setChargesSalariales(chargesSalarialesE);
-				salaire.setBrut(brutE);
-				
 				salaire.setId_employe(id_employeE);
 				SalaireModel salaireModel = new SalaireModel();
-				salaireModel.editSalaire(salaire);
-				JOptionPane.showMessageDialog(panel, "Salaire mis à jour");
+				salaireModel.addSalaire(salaire, employe);
+				JOptionPane.showMessageDialog(panel, "Salaire créé");
 				
 				vueAllSalairesForOneEmploye = new VueAllSalairesForOneEmploye(employe, layeredPane);
 				switchScreen(vueAllSalairesForOneEmploye);
@@ -264,13 +261,7 @@ public class VueFormAddSalaire extends JPanel {
 		panel.setLayout(gl_panel);
 		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");  
-		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		dateDebut.setText(dateFormat.format(salaire.getDateDebut()));
-		dateFin.setText(dateFormat.format(salaire.getDateFin()));
-		chargesPatronales.setText(String.valueOf(salaire.getChargesPatronales()));
-		chargesSalariales.setText(String.valueOf(salaire.getChargesSalariales()));
-		brut.setText(String.valueOf(salaire.getBrut()));
+
 		setLayout(groupLayout);
 		
 	}

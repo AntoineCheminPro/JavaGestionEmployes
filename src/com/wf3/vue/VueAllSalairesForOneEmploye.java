@@ -195,14 +195,9 @@ public class VueAllSalairesForOneEmploye extends JPanel {
 	}
 	public void addSalaire() {
 		
-		try {
-			switchToAddSalaireScreen(employe, salaire);
-			
-			} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		switchToAddSalaireScreen(employe);
 	}
+	
 public void switchToEditSalaireScreen(Employe employe, Salaire salaire) {
 		
 		VueFormEditSalaire vueFormEditSalaire = new VueFormEditSalaire(employe, salaire, layeredPane);

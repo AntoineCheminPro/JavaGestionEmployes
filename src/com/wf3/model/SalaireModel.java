@@ -52,13 +52,14 @@ public class SalaireModel extends Model {
 	}
 
 	public int editSalaire(Salaire salaire) {
-
+		
 		Connection connexion = dbConnect();
 
 		PreparedStatement statement;
 		try {
+			
 			statement = connexion.prepareStatement("UPDATE salaire SET "
-					+ "dateDabut=?, dateFin=?, chargesPatronales=?, chargesSalariales=?, brut=?" + "WHERE id="
+					+ "dateDebut=?, dateFin=?, chargesPatronales=?, chargesSalariales=?, brut=?" + " WHERE id="
 					+ salaire.getId());
 			
 			statement.setDate(1, new java.sql.Date(salaire.getDateDebut().getTime()));
@@ -66,6 +67,10 @@ public class SalaireModel extends Model {
 			statement.setFloat(3, salaire.getChargesPatronales());
 			statement.setFloat(4, salaire.getChargesSalariales());
 			statement.setFloat(5, salaire.getBrut());
+			
+		//	System.out.println("brut" + salaire.getBrut());
+			System.out.println(statement);
+			
 			statement.executeUpdate();
 
 			statement.close();

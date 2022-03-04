@@ -28,7 +28,7 @@ import com.wf3.model.GestionDate;
 import com.wf3.model.Salaire;
 import com.wf3.model.SalaireModel;
 
-public class VueFormEditSalaire extends JPanel {
+public class VueFormAddSalaire extends JPanel {
 	public JPanel panel;
 	
 	private JLabel labelDateDebut;
@@ -43,7 +43,7 @@ public class VueFormEditSalaire extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public VueFormEditSalaire( Employe employe, Salaire salaire, JLayeredPane layeredPane) {
+	public VueFormAddSalaire( Employe employe, Salaire salaire, JLayeredPane layeredPane) {
 
 		this.layeredPane = layeredPane;
 		this.employe = employe;

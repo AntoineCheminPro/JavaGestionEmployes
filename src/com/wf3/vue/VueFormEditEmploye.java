@@ -199,6 +199,8 @@ public class VueFormEditEmploye extends JPanel {
 		);
 		panel_5.setLayout(gl_panel_5);
 		
+		
+		//bouton modifier
 		JPanel panel_6 = new JPanel();
 		
 		JButton btnNewButton = new JButton("Modifier");

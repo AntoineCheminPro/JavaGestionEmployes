@@ -93,14 +93,14 @@ public class VueAllSalairesForOneEmploye extends JPanel {
 		
 
 		// bouton ajouter salaire
-//		JButton btnNewButton = new JButton("ajouter");
-//		btnNewButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				addSalaire();
-//			}
-//				
-//		});
-//		btnNewButton.setBackground(Color.GREEN);
+		JButton btnNewButton = new JButton("ajouter");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addSalaire();
+			}
+				
+		});
+		btnNewButton.setBackground(Color.GREEN);
 		
 		// bouton éditer salaire
 		JButton btnNewButton_1 = new JButton("Editer");
@@ -118,7 +118,7 @@ public class VueAllSalairesForOneEmploye extends JPanel {
 		
 	
 	
-	// bouton éditer salaire
+	// bouton delete salaire
 			JButton btnNewButton_2 = new JButton("supprimer");
 			btnNewButton_2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -132,7 +132,7 @@ public class VueAllSalairesForOneEmploye extends JPanel {
 			});
 			btnNewButton_2.setBackground(Color.RED);
 			
-//			panel.add(btnNewButton);
+			panel.add(btnNewButton);
 			panel.add(btnNewButton_1);
 			panel.add(btnNewButton_2);
 
@@ -193,6 +193,16 @@ public class VueAllSalairesForOneEmploye extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	public void addSalaire() {
+		
+		try {
+			switchToAddSalaireScreen(employe, salaire);
+			
+			} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 public void switchToEditSalaireScreen(Employe employe, Salaire salaire) {
 		
 		VueFormEditSalaire vueFormEditSalaire = new VueFormEditSalaire(employe, salaire, layeredPane);
@@ -201,4 +211,12 @@ public void switchToEditSalaireScreen(Employe employe, Salaire salaire) {
 	    layeredPane.repaint();
 	    layeredPane.revalidate();
 	}
+public void switchToAddSalaireScreen(Employe employe) {
+	
+	VueFormAddSalaire vueFormAddSalaire = new VueFormAddSalaire(employe, layeredPane);
+    layeredPane.removeAll();
+    layeredPane.add(vueFormAddSalaire);
+    layeredPane.repaint();
+    layeredPane.revalidate();
+}
 }

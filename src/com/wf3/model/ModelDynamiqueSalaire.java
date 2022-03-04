@@ -15,13 +15,15 @@ import javax.swing.table.AbstractTableModel;
 @SuppressWarnings("serial")
 public class ModelDynamiqueSalaire extends AbstractTableModel {
     private final List<Salaire> salaires;
+    private Employe employe;
  
     private final String[] entetes = {"Identifant", "date de debut", "date de fin", "charges patronales", "charges salariales", 
     						"brut", "identifiant employé"};
  
-    public ModelDynamiqueSalaire(ArrayList<Salaire> salaires) {
+    public ModelDynamiqueSalaire(ArrayList<Salaire> salaires, Employe employe) {
         super();
         this.salaires = salaires;
+        this.employe = employe;
     }
  
     public int getRowCount() {
@@ -37,8 +39,10 @@ public class ModelDynamiqueSalaire extends AbstractTableModel {
     }
  
     public Object getValueAt(int rowIndex, int columnIndex) {
+    	
     	DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
     
+    	
         switch(columnIndex){
 	        case 0:
 	            return salaires.get(rowIndex).getId();
@@ -53,7 +57,7 @@ public class ModelDynamiqueSalaire extends AbstractTableModel {
             case 5:
                 return salaires.get(rowIndex).getBrut();
             case 6:
-                return salaires.get(rowIndex).getId_employe();
+                return employe.getId();
            default:
                 return null; //Ne devrait jamais arriver
         }

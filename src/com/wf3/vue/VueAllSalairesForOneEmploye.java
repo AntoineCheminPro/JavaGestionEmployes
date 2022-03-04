@@ -60,7 +60,8 @@ public class VueAllSalairesForOneEmploye extends JPanel {
 		
 		JPanel panel = new JPanel();
 		
-		modelDynSalaire = new ModelDynamiqueSalaire(getAllSalairesForOneEmploye(employe));
+		
+		modelDynSalaire = new ModelDynamiqueSalaire(getAllSalairesForOneEmploye(employe), employe);
 		table = new JTable(modelDynSalaire);
 		table.setBackground(Color.WHITE);
 		JScrollPane scroll = new JScrollPane(table);
@@ -119,7 +120,7 @@ public class VueAllSalairesForOneEmploye extends JPanel {
 	
 	// bouton éditer salaire
 			JButton btnNewButton_2 = new JButton("supprimer");
-			btnNewButton_1.addActionListener(new ActionListener() {
+			btnNewButton_2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(table.getSelectionModel().isSelectionEmpty()) {
 						JOptionPane.showMessageDialog(layeredPane, "Selectionnez une ligne svp", "Error", JOptionPane.ERROR_MESSAGE);
@@ -129,7 +130,7 @@ public class VueAllSalairesForOneEmploye extends JPanel {
 					}
 				}
 			});
-			btnNewButton_1.setBackground(Color.RED);
+			btnNewButton_2.setBackground(Color.RED);
 			
 //			panel.add(btnNewButton);
 			panel.add(btnNewButton_1);
@@ -162,7 +163,7 @@ public class VueAllSalairesForOneEmploye extends JPanel {
 		 return Integer.parseInt(id);
 	}
 	
-	public void deleteSalaire() {
+	public void deleteSalaire() { 
 		   
 	    SalaireModel salaireMod = new SalaireModel();
 	    int row = table.getSelectedRow();

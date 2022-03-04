@@ -120,7 +120,7 @@ public class SalaireModel extends Model {
 
 		PreparedStatement statement;
 		try {
-			statement = connexion.prepareStatement("DELETE FROM salaire WHERE id=" + id);
+			statement = connexion.prepareStatement("DELETE FROM employes WHERE id=" + id);
 				statement.executeUpdate();
 
 				statement.close();
@@ -138,18 +138,18 @@ public class SalaireModel extends Model {
 	public ArrayList<Salaire> getAllSalaires(int id_employe) throws ParseException {
 		Connection connexion = dbConnect();
 
-		PreparedStatement statement;
+		
 		try {
 
 			if (connexion != null) {
 				// create JDBC statement object
-				Statement st = connexion.createStatement();
+				Statement statement = connexion.createStatement();
 
 				// prepare SQL query
 				String query = "SELECT id, dateDebut, dateFin, chargesPatronales, chargesSalariales, brut"
 						+ " FROM salaire "
 						+ "WHERE id_employe="+id_employe;
-				ResultSet resultat = st.executeQuery(query);
+				ResultSet resultat = statement.executeQuery(query);
 
 				ArrayList<Salaire> salaires = new ArrayList<Salaire>();
 
@@ -163,7 +163,7 @@ public class SalaireModel extends Model {
 				}
 
 				resultat.close();
-				st.close();
+				statement.close();
 				connexion.close();
 
 				return salaires;

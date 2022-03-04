@@ -49,7 +49,7 @@ public class VueFormEditSalaire extends JPanel {
 		
 		JPanel panel_7 = new JPanel();
 		
-		//nom
+		//date du début
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.YELLOW);
 		labelDateDebut = new JLabel("DateDebut");
@@ -57,7 +57,7 @@ public class VueFormEditSalaire extends JPanel {
 		labelDateDebut.setLabelFor(DateDebut);
 		DateDebut.setColumns(10);
 		
-		//prenom
+		//date de fin
 		labelDateFin = new JLabel("DateFin");
 		DateFin = new JTextField();
 		DateFin.setColumns(10);
@@ -65,7 +65,7 @@ public class VueFormEditSalaire extends JPanel {
 		ButtonGroup Group = new ButtonGroup();
 		
 		
-		// date de naissance
+		// charges salariales
 		JPanel panel_2 = new JPanel();
 		JLabel labelChargesSalariales = new JLabel("Charges Salariales");
 		JTextField chargesSalariales = new JTextField();
@@ -91,7 +91,7 @@ public class VueFormEditSalaire extends JPanel {
 		);
 		panel_2.setLayout(gl_panel_2);
 		
-		// code
+		// charges patronales
 		JPanel panel_3 = new JPanel();
 		JLabel labelChargesPatronales = new JLabel("Charges Patronales");
 		JTextField ChargesPatronales = new JTextField();
@@ -117,7 +117,7 @@ public class VueFormEditSalaire extends JPanel {
 		panel_3.setLayout(gl_panel_3);
 		
 		
-		//quotite
+		//brut
 		JPanel panel_4 = new JPanel();
 		JLabel labelBrut = new JLabel("Brut");
 		JTextField brut = new JTextField();
@@ -164,7 +164,7 @@ public class VueFormEditSalaire extends JPanel {
 		panel_6.setLayout(gl_panel_6);
 		
 		
-		
+		// action listement bouton enregistrer
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

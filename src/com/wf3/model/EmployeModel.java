@@ -101,18 +101,18 @@ public class EmployeModel extends Model {
 	public ArrayList<Employe> getAllEmploye() throws ParseException {
 		Connection connexion = dbConnect();
 
-		PreparedStatement statement;
+		
 		try {
 
 			if (connexion != null) {
 				// create JDBC statement object
-				Statement st = connexion.createStatement();
+				Statement statement = connexion.createStatement();
 
 				// prepare SQL query
 				String query = "SELECT id, nom, prenom, sexe, date_naissance, "
 						+ "date_embauche, quotite, code  FROM employes";
 
-				ResultSet resultat = st.executeQuery(query);
+				ResultSet resultat = statement.executeQuery(query);
 
 				ArrayList<Employe> employes = new ArrayList<Employe>();
 
@@ -128,7 +128,7 @@ public class EmployeModel extends Model {
 				}
 
 				resultat.close();
-				st.close();
+				statement.close();
 				connexion.close();
 
 				return employes;
